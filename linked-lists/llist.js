@@ -1,5 +1,6 @@
 // JavaScript implementation of linked lists
 
+// Linked list class to hold node methods
 class LinkedList {
   // Inialize linked list object
   constructor() {
@@ -14,18 +15,23 @@ class LinkedList {
       return;
     } 
 
-    var currentNode = this.head;
+    let currentNode = this.head;
     while (currentNode.next != null) {
       currentNode = currentNode.next;
     }
     currentNode.next = new Node(data);
   }
 
-
+  // Adds data as new node at head of list
+  prepend(data) {
+    let newNode = new Node(data);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
   // Displays all data starting with the head
   display() {
     if (this.head == null) return;
-    var currentNode = this.head;
+    let currentNode = this.head;
     do {
       console.log(currentNode.data);
       currentNode = currentNode.next;
@@ -33,6 +39,7 @@ class LinkedList {
   }
 }
 
+// Node class
 class Node {
   // Initialize node object with data
   // Next pointer will be set to null
@@ -45,7 +52,7 @@ class Node {
 
 // Tests
 var linkedList = new LinkedList();
-linkedList.append('Hello');
 linkedList.append('John');
 linkedList.append('!');
+linkedList.prepend('Hello');
 linkedList.display();
