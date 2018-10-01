@@ -106,6 +106,8 @@ class LinkedList {
       currentNode = currentNode.next;
     }
   }
+
+  // Detect loop
 }
 
 // Node class
@@ -132,3 +134,12 @@ linkedList.addBefore('Hello', 'Well');
 linkedList.addAfter('John', 'Poop');
 linkedList.delete('Poop');
 linkedList.traverse();
+
+/*
+Questions
+
+To find the nth from the end of a linked list, do you have to traverse twice?
+  -It wouldn't make sense to build an array while traversing
+  -What if, as you traversed, you always kept track of the node that is n behind the current?
+  -^meaning traverse until you are n ahead of the head, then, starting from the head, traverse the list synchronously
+*/
