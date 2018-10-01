@@ -1,4 +1,6 @@
 // JavaScript implementation of linked lists
+// Note to self: ctrl + alt + n to run within VS Code
+
 
 // Linked list class to hold node methods
 class LinkedList {
@@ -28,14 +30,59 @@ class LinkedList {
     newNode.next = this.head;
     this.head = newNode;
   }
-  // Displays all data starting with the head
-  display() {
+
+  // Adds data after first instance of given key.
+  // Nothing is changed if key is not found
+  addAfter(key, data) {
     if (this.head == null) return;
+
     let currentNode = this.head;
-    do {
+    while (currentNode != null && currentNode.data != key) {
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode != null) {
+      let tempNode = currentNode.next;
+      currentNode.next = new Node(data);
+      currentNode.next.next = tempNode;
+      return;
+    }
+  }
+
+  // Adds data before first instance of given key
+  // Again, nothing is changed if key is not found
+  addBefore(key, data) {
+    if (this.head == null) return;
+    
+    let currentNode = this.head;
+    let prevNode = null;
+
+    while(currentNode != null && currentNode.data != key) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode != null) {
+      let tempNode = new Node(data);
+      tempNode.next = currentNode;
+      if (prevNode != null) {
+        prevNode.next = tempNode;
+      } else {
+        this.head = tempNode;
+      }
+      return;
+    }
+  }
+  
+  // Displays all data starting with the head
+  traverse() {
+    if (this.head == null) return;
+
+    let currentNode = this.head;
+    while (currentNode != null) {
       console.log(currentNode.data);
       currentNode = currentNode.next;
-    } while (currentNode != null);
+    }
   }
 }
 
@@ -55,4 +102,9 @@ var linkedList = new LinkedList();
 linkedList.append('John');
 linkedList.append('!');
 linkedList.prepend('Hello');
-linkedList.display();
+linkedList.addAfter('John', 'Yamashiro');
+linkedList.addAfter('nono', 'ERROR');
+linkedList.addBefore('Yamashiro', 'Yukio');
+linkedList.addBefore('Bort', 'ERROR');
+linkedList.addBefore('Hello', 'Well');
+linkedList.traverse();
