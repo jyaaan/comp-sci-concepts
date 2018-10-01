@@ -1,4 +1,6 @@
 // JavaScript implementation of linked lists
+// Note to self: ctrl + alt + n to run within VS Code
+
 
 // Linked list class to hold node methods
 class LinkedList {
@@ -28,15 +30,84 @@ class LinkedList {
     newNode.next = this.head;
     this.head = newNode;
   }
-  // Displays all data starting with the head
-  display() {
+
+  // Adds data after first instance of given key.
+  // Nothing is changed if key is not found
+  addAfter(key, data) {
     if (this.head == null) return;
+
     let currentNode = this.head;
-    do {
+    while (currentNode != null && currentNode.data != key) {
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode) {
+      let tempNode = currentNode.next;
+      currentNode.next = new Node(data);
+      currentNode.next.next = tempNode;
+      return;
+    }
+  }
+
+  // Adds data before first instance of given key
+  // Again, nothing is changed if key is not found
+  addBefore(key, data) {
+    if (this.head == null) return;
+    
+    let currentNode = this.head;
+    let prevNode = null;
+
+    while(currentNode != null && currentNode.data != key) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode) {
+      let tempNode = new Node(data);
+      tempNode.next = currentNode;
+      if (prevNode) {
+        prevNode.next = tempNode;
+      } else {
+        this.head = tempNode;
+      }
+      return;
+    }
+  }
+
+  // Deletes node that matches first instance of given data
+  delete(data) {
+    if (this.head == null) return;
+
+    let currentNode = this.head;
+    let prevNode = null;
+
+    while(currentNode != null && currentNode.data != data) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode != null) {
+      if (prevNode) {
+        prevNode.next = currentNode.next;
+      } else {
+        this.head = currentNode.next;
+      }
+      return;
+    }
+  }
+
+  // Displays all data starting with the head
+  traverse() {
+    if (this.head == null) return;
+
+    let currentNode = this.head;
+    while (currentNode != null) {
       console.log(currentNode.data);
       currentNode = currentNode.next;
-    } while (currentNode != null);
+    }
   }
+
+  // Detect loop
 }
 
 // Node class
@@ -55,4 +126,20 @@ var linkedList = new LinkedList();
 linkedList.append('John');
 linkedList.append('!');
 linkedList.prepend('Hello');
-linkedList.display();
+linkedList.addAfter('John', 'Yamashiro');
+linkedList.addAfter('nono', 'ERROR');
+linkedList.addBefore('Yamashiro', 'Yukio');
+linkedList.addBefore('Bort', 'ERROR');
+linkedList.addBefore('Hello', 'Well');
+linkedList.addAfter('John', 'Poop');
+linkedList.delete('Poop');
+linkedList.traverse();
+
+/*
+Questions
+
+To find the nth from the end of a linked list, do you have to traverse twice?
+  -It wouldn't make sense to build an array while traversing
+  -What if, as you traversed, you always kept track of the node that is n behind the current?
+  -^meaning traverse until you are n ahead of the head, then, starting from the head, traverse the list synchronously
+*/
