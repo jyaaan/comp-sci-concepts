@@ -41,7 +41,7 @@ class LinkedList {
       currentNode = currentNode.next;
     }
 
-    if (currentNode != null) {
+    if (currentNode) {
       let tempNode = currentNode.next;
       currentNode.next = new Node(data);
       currentNode.next.next = tempNode;
@@ -62,10 +62,10 @@ class LinkedList {
       currentNode = currentNode.next;
     }
 
-    if (currentNode != null) {
+    if (currentNode) {
       let tempNode = new Node(data);
       tempNode.next = currentNode;
-      if (prevNode != null) {
+      if (prevNode) {
         prevNode.next = tempNode;
       } else {
         this.head = tempNode;
@@ -73,7 +73,29 @@ class LinkedList {
       return;
     }
   }
-  
+
+  // Deletes node that matches first instance of given data
+  delete(data) {
+    if (this.head == null) return;
+
+    let currentNode = this.head;
+    let prevNode = null;
+
+    while(currentNode != null && currentNode.data != data) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    if (currentNode != null) {
+      if (prevNode) {
+        prevNode.next = currentNode.next;
+      } else {
+        this.head = currentNode.next;
+      }
+      return;
+    }
+  }
+
   // Displays all data starting with the head
   traverse() {
     if (this.head == null) return;
@@ -107,4 +129,6 @@ linkedList.addAfter('nono', 'ERROR');
 linkedList.addBefore('Yamashiro', 'Yukio');
 linkedList.addBefore('Bort', 'ERROR');
 linkedList.addBefore('Hello', 'Well');
+linkedList.addAfter('John', 'Poop');
+linkedList.delete('Poop');
 linkedList.traverse();
