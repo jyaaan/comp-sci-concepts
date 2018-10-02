@@ -44,7 +44,7 @@ class DoublyLinkedList {
     if (currentNode != null) {
       let tempNode = currentNode.next;
       let newNode = new Node(data);
-      
+
       tempNode.prev = newNode;
       newNode.next = tempNode;
       newNode.prev = currentNode;
@@ -52,12 +52,34 @@ class DoublyLinkedList {
     }
   }
 
-  addBefore() {
+  addBefore(key, data) {
     if (this.head == null) return; // If there is no list, do nothing
+
+    let currentNode = this.head;
+
+    while (currentNode != null && currentNode.data != key) {
+      currentNode = currentNode.next;
+    }
+    
+    if (currentNode != null) {
+      let prevNode = currentNode.prev;
+      let newNode = new Node(data);
+      
+      prevNode.next = newNode;
+      newNode.prev = prevNode;
+      newNode.next = currentNode;
+      currentNode.prev = newNode;
+    }
   }
 
-  delete() {
+  delete(data) {
+    if (this.head == null) return; // If there is no list, do nothing
 
+    let currentNode = this.head;
+
+    while (currentNode != null && currentNode.data != key) {
+      currentNode = currentNode.next;
+    }
   }
 
   traverse() {
@@ -107,4 +129,5 @@ list.append('john');
 list.prepend('well');
 list.append('yamashiro');
 list.addAfter('john', 'yukio');
+list.addBefore('john', 'there');
 list.bounce();
