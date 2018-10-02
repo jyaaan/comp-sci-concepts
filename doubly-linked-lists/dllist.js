@@ -32,12 +32,28 @@ class DoublyLinkedList {
     this.head = newNode;
   }
 
-  addAfter() {
+  addAfter(key, data) {
+    if (this.head == null) return; // If there is no list, do nothing
 
+    let currentNode = this.head;
+
+    while (currentNode != null && currentNode.data != key) {
+      currentNode = currentNode.next;
+    }
+    
+    if (currentNode != null) {
+      let tempNode = currentNode.next;
+      let newNode = new Node(data);
+      
+      tempNode.prev = newNode;
+      newNode.next = tempNode;
+      newNode.prev = currentNode;
+      currentNode.next = newNode;
+    }
   }
 
   addBefore() {
-
+    if (this.head == null) return; // If there is no list, do nothing
   }
 
   delete() {
@@ -90,4 +106,5 @@ list.prepend('hello');
 list.append('john');
 list.prepend('well');
 list.append('yamashiro');
+list.addAfter('john', 'yukio');
 list.bounce();
