@@ -30,7 +30,7 @@ class Queue {
     }
   }
 
-  pop() {
+  remove() {
     if (this.head == null) return;
 
     let returnNode = this.head;
