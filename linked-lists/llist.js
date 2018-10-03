@@ -122,7 +122,7 @@ class Node {
 
 
 // Tests
-var linkedList = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.append('John');
 linkedList.append('!');
 linkedList.prepend('Hello');

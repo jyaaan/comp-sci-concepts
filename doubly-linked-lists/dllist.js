@@ -16,6 +16,7 @@ class DoublyLinkedList {
     while(currentNode.next != null) {
       currentNode = currentNode.next;
     }
+
     currentNode.next = new Node(data);
     currentNode.next.prev = currentNode;
   }
@@ -27,6 +28,7 @@ class DoublyLinkedList {
     }
 
     let newNode = new Node(data);
+
     this.head.prev = newNode;
     newNode.next = this.head;
     this.head = newNode;
@@ -72,7 +74,7 @@ class DoublyLinkedList {
     }
   }
 
-  delete(data) {
+  delete(key) {
     if (this.head == null) return; // If there is no list, do nothing
 
     let currentNode = this.head;
@@ -123,7 +125,7 @@ class Node {
   }
 }
 
-var list = new DoublyLinkedList();
+let list = new DoublyLinkedList();
 list.prepend('hello');
 list.append('john');
 list.prepend('well');
