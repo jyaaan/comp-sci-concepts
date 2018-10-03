@@ -35,6 +35,9 @@ class Queue {
 
     let returnNode = this.head;
     this.head = this.head.next;
+    if (this.head == null) {
+      this.tail = null;
+    }
     return returnNode.data;
   }
 }
