@@ -87,12 +87,14 @@ class MinHeap {
       index = smallerChildIndex;
     }
   }
+
+  display() {
+    console.log(this.items);
+  }
 }
 
 let heap = new MinHeap();
 heap.add(5);
-console.log(heap.peek());
 heap.add(10);
-console.log(heap.peek());
 heap.add(1);
-console.log(heap.peek());
+heap.display();

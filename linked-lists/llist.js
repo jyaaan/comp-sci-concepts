@@ -107,6 +107,17 @@ class LinkedList {
     }
   }
 
+  find(key) {
+    if (this.head == null) return;
+    let currentNode = this.head;
+    while (currentNode != null) {
+      if(currentNode.data.key == key) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+  }
+
   // Detect loop
 }
 
@@ -119,6 +130,8 @@ class Node {
     this.next = null;
   }
 }
+
+module.exports = LinkedList;
 
 
 // Tests
